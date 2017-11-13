@@ -9,10 +9,15 @@
   return obj;
 }*/
 
-const extend = (obj, mixin) => {
-  Object.keys(mixin).forEach(key => obj[key] = mixin[key]);
-  return obj;
-};
+const extend = (obj, ...objects) => {
+  for (const i in objects) {
+    Object.keys(objects[i]).map(key => {
+      if (!obj.hasOwnProperty(key)) {
+        obj[key] = objects[i][key];
+      }
+    });
+  }               // keys from objects will be mixed into obj
+};                // only if it doesn't contain those keys
 
 const obj1 = {
   name: 'Marcus Aurelius',
